@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<script src="js/jquery-2.1.3.min.js"></script>
+<link rel="stylesheet" href="css/sample.css">
+<title>じゃんけん</title>
+</head>
+<body>
+
+<header>
+  <h1>第２回戦 -HIKAKIN-</h1>
+</header>
+
+<main>
+  <div class="photo">
+    <img class="img" src="./img/hikakin_janken.png" alt="">
+  </div>
+  <ul>
+    <li class="my_hands" id="gu_btn">グー</li>
+    <li class="my_hands" id="cho_btn">チョキ</li>
+    <li class="my_hands" id="par_btn">パー</li>
+  </ul>
+  <div>HIKAKINの出した手は？「<span id="pc_hands">なに？</span>」</div>
+  <div id="judgement">結果</div>
+  <div class="photo">
+    <img class="img2">
+  </div>
+  <div id="tara"></div>
+  <div class="btn">
+    <button id="btn"></button>
+  </div>
+</main>
+
+<footer></footer>
+<script>
+//じゃんけん用のSCRIPTを書いてください
+let janken = ["グー", "チョキ", "パー"];
+let janken_r = Math.ceil(Math.random() * 3) - 1;
+let janken_probability = Math.ceil(Math.random() * 100);
+const imgs =  ["hikakin_gu.png", "hikakin_choki.jpeg", "hikakin_par.jpeg"]; 
+const resultimg = ["hikakin_aiko.jpeg", "hikakin_win.jpeg", "hikakin_lose.png"];
+
+// $("li").on("click",function(){
+
+//   $("#pc_hands").html(janken[janken_r]);
+
+//   let n = $('li.my_hands').index(this);
+//   $('.img').attr('src', 'img/' + imgs[janken_r]);
+
+//   if ((janken_r - n + 3) % 3 == 0) {
+//     $("#judgement").html("あいこ");
+//     $('.img2').attr('src', 'img/' + resultimg[0]);
+//     $("#tara").html("やるねぇ。");
+
+//     // $("#btn").html("もう一度")
+
+//   }
+//   else if ((janken_r - n + 3) % 3 == 1) {
+//     $("#judgement").html("あなたの勝ち");
+//     $('.img2').attr('src', 'img/' + resultimg[1]);
+//     $("#tara").html("バーイ");
+//     // location = './janken_';
+//   }
+//   else {
+//     $("#judgement").html("あなたの負け");
+//     $('.img2').attr('src', 'img/' + resultimg[2]);
+//     $("#tara").html("くぁｗせｄｒｆｔｇｙふじこｌｐ");
+//   }
+// });
+
+$("#gu_btn").on("click",function(){
+  $('.img').attr('src', 'img/' + imgs[janken_r]);
+  $("#pc_hands").html(janken[janken_r]);
+  
+  if(janken_probability > 40){
+    janken_r = 2;
+  }
+
+  if (janken_r == 0) {
+    $("#judgement").html("あいこ");
+    $('.img2').attr('src', 'img/' + resultimg[0]);
+    $("#tara").html("やるねぇ。");
+    $("#btn").html("もう一度")
+    $(".btn").on("click", function(){
+      location.reload();
+    })
+  }
+  else if (janken_r == 1) {
+    $("#judgement").html("あなたの勝ち");
+    $('.img2').attr('src', 'img/' + resultimg[1]);
+    $("#tara").html("バーイ");
+    $("#btn").html("次の対戦相手へ進む")
+    $(".btn").on("click", function(){
+      location.href= "./janken_tpl3.html";
+    })
+  }
+  else {
+    $("#judgement").html("あなたの負け");
+    $('.img2').attr('src', 'img/' + resultimg[2]);
+    $("#tara").html("くぁｗせｄｒｆｔｇｙふじこｌｐ(煽り顔)");
+    $("#btn").html("最初から出直す")
+    $(".btn").on("click", function(){
+      location.href= "./janken_tpl.html";
+    })
+  }
+});
+
+$("#cho_btn").on("click",function(){
+  $('.img').attr('src', 'img/' + imgs[janken_r]);
+  $("#pc_hands").html(janken[janken_r]);
+  
+  if(janken_probability > 40){
+    janken_r = 0;
+  }
+
+  if (janken_r == 1) {
+    $("#judgement").html("あいこ");
+    $('.img2').attr('src', 'img/' + resultimg[0]);
+    $("#tara").html("やるねぇ。");
+    $("#btn").html("もう一度")
+    $(".btn").on("click", function(){
+      location.reload();
+    })
+  }
+  else if (janken_r == 2) {
+    $("#judgement").html("あなたの勝ち");
+    $('.img2').attr('src', 'img/' + resultimg[1]);
+    $("#tara").html("バーイ");
+    $("#btn").html("次の対戦相手へ進む")
+    $(".btn").on("click", function(){
+      location.href= "./janken_tpl3.html";
+    })
+  }
+  else {
+    $("#judgement").html("負け");
+    $("#judgement").html("あなたの負け");
+    $('.img2').attr('src', 'img/' + resultimg[2]);
+    $("#tara").html("くぁｗせｄｒｆｔｇｙふじこｌｐ(煽り顔)");
+    $("#btn").html("最初から出直す")
+    $(".btn").on("click", function(){
+      location.href= "./janken_tpl.html";
+    })
+  }
+});
+
+$("#par_btn").on("click",function(){
+  $('.img').attr('src', 'img/' + imgs[janken_r]);
+  $("#pc_hands").html(janken[janken_r]);
+
+  if(janken_probability > 40){
+    janken_r = 1;
+  }
+
+  if (janken_r == 2) {
+    $("#judgement").html("あいこ");
+    $('.img2').attr('src', 'img/' + resultimg[0]);
+    $("#tara").html("やるねぇ。");
+    $("#btn").html("もう一度")
+    $(".btn").on("click", function(){
+      location.reload();
+    })
+  }
+  else if (janken_r == 0) {
+    $("#judgement").html("あなたの勝ち");
+    $('.img2').attr('src', 'img/' + resultimg[1]);
+    $("#tara").html("バーイ");
+    $("#btn").html("次の対戦相手へ進む")
+    $(".btn").on("click", function(){
+      location.href= "./janken_tpl3.html";
+    })
+  }
+  else {
+    $("#judgement").html("あなたの負け");
+    $('.img2').attr('src', 'img/' + resultimg[2]);
+    $("#tara").html("くぁｗせｄｒｆｔｇｙふじこｌｐ(煽り顔)");
+    $("#btn").html("最初から出直す")
+    $(".btn").on("click", function(){
+      location.href= "./janken_tpl.html";
+    })
+  }
+});
+
+</script>
+</body>
+</html>
